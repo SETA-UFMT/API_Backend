@@ -15,6 +15,8 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     
     // Verifica se existe um usuário com o nome de usuário fornecido
     boolean existsByUsername(String username);
+
+    boolean existsByCpf(String cpf);
 }
 
 // Explicação:

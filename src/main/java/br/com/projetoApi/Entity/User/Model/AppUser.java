@@ -8,46 +8,38 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
-// Classe de entidade JPA que representa um usuário no banco de dados
 @Entity
-// Gera automaticamente os métodos getters para todos os campos
 @Getter
-// Gera automaticamente os métodos setters para todos os campos
 @Setter
-// Gera um construtor padrão (sem argumentos)
 @NoArgsConstructor
-// Gera um construtor com todos os campos
 @AllArgsConstructor
 public class AppUser {
 
-    // Identificador único do usuário, gerado automaticamente
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
-    // Nome de usuário, armazenado como uma coluna no banco
+
+    @NotNull(message = "CPF é obrigatório")
+    @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}", message = "CPF deve estar no formato 123.456.789-01")
+    private String cpf;
+
+    @NotNull(message = "Nome de usuário é obrigatório")
     private String username;
-    
-    // Senha do usuário, armazenada como uma coluna no banco (deve ser criptografada)
+
+    @NotNull(message = "Senha é obrigatória")
     private String password;
-    
-    // Lista de papéis (roles) do usuário, armazenada como uma coleção no banco
+
     @ElementCollection
     private List<String> roles;
 
-    // Obtém a lista de papéis do usuário, retornada como Optional para tratar casos nulos
     public Optional<List<String>> getRoles() {
         return Optional.ofNullable(roles);
     }
 }
-
-// Explicação:
-// Esta classe representa um usuário no sistema, incluindo seu ID, nome de usuário, senha e papéis.
-// É usada pelo JPA para mapear a entidade para uma tabela no banco de dados.
-// Os métodos getters e setters são gerados automaticamente pelas anotações do Lombok.
-// A lista de papéis é armazenada como uma coleção, permitindo que um usuário tenha múltiplos papéis no sistema.

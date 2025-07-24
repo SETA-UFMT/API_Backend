@@ -45,25 +45,26 @@ public class AppUserController {
     private JwtUtil jwtUtil;
 
     @Operation(summary = "Registrar um novo usuário", 
-               description = "Cria um novo usuário com base no nome de usuário e senha fornecidos.")
+               description = "Cria um novo usuário com base no nome de usuário, senha e CPF fornecidos.")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Usuário registrado com sucesso",
             content = @Content(mediaType = "application/json", 
                 schema = @Schema(implementation = AppUserResponse.class))),
-        @ApiResponse(responseCode = "400", description = "Erro na requisição, como usuário já existente",
+        @ApiResponse(responseCode = "400", description = "Erro na requisição, como usuário ou CPF já existente",
             content = @Content(mediaType = "application/json", 
                 schema = @Schema(implementation = Map.class)))
     })
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody 
-        @Schema(example = "{\"username\": \"testuser\", \"password\": \"testpassword\"}") 
+        @Schema(example = "{\"username\": \"testuser\", \"password\": \"testpassword\", \"cpf\": \"12345678901\"}") 
         AppUserRegistrationRequest request) {
         try {
-            AppUser user = userService.createUser(request.getUsername(), request.getPassword());
+            AppUser user = userService.createUser(request.getUsername(), request.getPassword(), request.getCpf());
             
             AppUserResponse response = new AppUserResponse();
             response.setMessage("Usuário registrado com sucesso!");
             response.setUsername(user.getUsername());
+            response.setCpf(user.getCpf());
             response.setId(user.getId());
             
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -104,11 +105,16 @@ public class AppUserController {
             // Gera um token JWT para o usuário autenticado
             String token = jwtUtil.generateToken(userDetails);
             
+            // Busca o usuário no banco para obter o CPF
+            AppUser user = userService.findByUsername(request.getUsername())
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado após autenticação"));
+            
             // Prepara a resposta com os dados do login e o token JWT
             AppUserResponse response = new AppUserResponse();
             response.setMessage("Login realizado com sucesso!");
-            response.setUsername(request.getUsername());
-            response.setAuthenticated(true);
+            response.setUsername(user.getUsername());
+            response.setCpf(user.getCpf());
+            response.setId(user.getId());
             response.setToken(token);
             
             return ResponseEntity.ok(response);

@@ -20,10 +20,10 @@ public class AppUserResponse {
     @Getter @Setter
     private Long id;
     
-    // Indica se o usuário está autenticado
-    // Anotações @Getter e @Setter geram automaticamente os métodos getAuthenticated e setAuthenticated
+    // CPF do usuário retornado na resposta
+    // Anotações @Getter e @Setter geram automaticamente os métodos getCpf e setCpf
     @Getter @Setter
-    private Boolean authenticated;
+    private String cpf;
     
     // Token JWT retornado após autenticação bem-sucedida
     // Anotações @Getter e @Setter geram automaticamente os métodos getToken e setToken

@@ -14,6 +14,11 @@ public class AppUserRegistrationRequest {
     // Anotações @Getter e @Setter geram automaticamente os métodos getPassword e setPassword
     @Getter @Setter
     private String password;
+
+    // CPF fornecido na requisição de registro
+    // Anotações @Getter e @Setter geram automaticamente os métodos getCpf e set
+    @Getter @Setter
+    private String cpf;
 }
 
 // Explicação
