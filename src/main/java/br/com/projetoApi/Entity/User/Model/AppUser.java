@@ -1,4 +1,4 @@
-package br.com.ProjetoApi.Entity.User.Model;
+package br.com.projetoApi.Entity.User.Model;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package br.com.ProjetoApi.Config;
+package br.com.projetoApi.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

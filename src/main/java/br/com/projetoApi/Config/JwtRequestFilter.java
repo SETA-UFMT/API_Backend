@@ -1,4 +1,4 @@
-package br.com.ProjetoApi.Config;
+package br.com.projetoApi.Config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -12,7 +12,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import br.com.ProjetoApi.Entity.User.Service.AppUserService;
+import br.com.projetoApi.Entity.User.Service.AppUserService;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package br.com.ProjetoApi.Entity.User.Dto;
+package br.com.projetoApi.Entity.User.Dto;
 
 import lombok.Getter;
 import lombok.Setter;

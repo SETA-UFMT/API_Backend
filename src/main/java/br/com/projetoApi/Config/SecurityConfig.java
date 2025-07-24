@@ -1,4 +1,4 @@
-package br.com.ProjetoApi.Config;
+package br.com.projetoApi.Config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import br.com.ProjetoApi.Entity.User.Service.AppUserService;
+import br.com.projetoApi.Entity.User.Service.AppUserService;
 
 // Classe de configuração do Spring Security para definir regras de segurança e autenticação
 @Configuration
@@ -44,6 +44,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // Permite acesso público às rotas de registro e login
                 .requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
+                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 
                 // Exige autenticação para rotas de perfil, logout e protegidas
                 .requestMatchers("/api/auth/profile", "/api/auth/logout").authenticated()

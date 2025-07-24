@@ -1,4 +1,4 @@
-    package br.com.ProjetoApi.Config;
+    package br.com.projetoApi.Config;
 
     import jakarta.servlet.http.HttpServletRequest;
     import jakarta.servlet.http.HttpServletResponse;

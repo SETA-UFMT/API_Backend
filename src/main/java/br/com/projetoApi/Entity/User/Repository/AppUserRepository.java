@@ -1,11 +1,11 @@
-package br.com.ProjetoApi.Entity.User.Repository;
+package br.com.projetoApi.Entity.User.Repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.ProjetoApi.Entity.User.Model.AppUser;
+import br.com.projetoApi.Entity.User.Model.AppUser;
 
 @Repository
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {

@@ -1,6 +1,3 @@
-# Versão do formato do Docker Compose
-version: '3.8'
-
 # Definição dos serviços que compõem a aplicação
 services:
   # Serviço da aplicação Spring Boot

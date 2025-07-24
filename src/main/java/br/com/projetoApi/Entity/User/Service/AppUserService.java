@@ -1,4 +1,4 @@
-package br.com.ProjetoApi.Entity.User.Service;
+package br.com.projetoApi.Entity.User.Service;
 
 import java.util.Optional;
 
@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.ProjetoApi.Entity.User.Model.AppUser;
-import br.com.ProjetoApi.Entity.User.Repository.AppUserRepository;
+import br.com.projetoApi.Entity.User.Model.AppUser;
+import br.com.projetoApi.Entity.User.Repository.AppUserRepository;
 
 @Service
 public class AppUserService implements UserDetailsService {

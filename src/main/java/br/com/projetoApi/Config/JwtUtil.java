@@ -1,4 +1,4 @@
-package br.com.ProjetoApi.Config;
+package br.com.projetoApi.Config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
