@@ -1,10 +1,11 @@
 package br.com.projetoApi.Entity.User.Model;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Optional; // Importação para Optional
 
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,9 +37,15 @@ public class AppUser {
     @NotNull(message = "Senha é obrigatória")
     private String password;
 
-    @ElementCollection
+    // Adicionado o campo email (se você o tiver em AppUserRegistrationRequest)
+    // Embora não tenha sido mostrado em AppUserRegistrationRequest, se você pretende usá-lo, adicione aqui.
+    // private String email; 
+
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
 
+    // Modificado para retornar Optional.ofNullable(roles) diretamente
+    // Sem o .orElse(List.of("")) para que a lógica de padrão seja no Service
     public Optional<List<String>> getRoles() {
         return Optional.ofNullable(roles);
     }

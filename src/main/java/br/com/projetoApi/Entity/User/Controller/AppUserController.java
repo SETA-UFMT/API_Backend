@@ -59,7 +59,7 @@ public class AppUserController {
         @Schema(example = "{\"username\": \"testuser\", \"password\": \"testpassword\", \"cpf\": \"12345678901\"}") 
         AppUserRegistrationRequest request) {
         try {
-            AppUser user = userService.createUser(request.getUsername(), request.getPassword(), request.getCpf());
+            AppUser user = userService.createUser(request);
             
             AppUserResponse response = new AppUserResponse();
             response.setMessage("Usuário registrado com sucesso!");
@@ -91,25 +91,19 @@ public class AppUserController {
         @Schema(example = "{\"username\": \"testuser\", \"password\": \"testpassword\"}") 
         AppUserLoginRequest request) {
         try {
-            // Autentica o usuário com as credenciais fornecidas
             org.springframework.security.core.Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
             );
             
-            // Define a autenticação no contexto de segurança
             SecurityContextHolder.getContext().setAuthentication(authentication);
             
-            // Obtém os detalhes do usuário autenticado
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             
-            // Gera um token JWT para o usuário autenticado
             String token = jwtUtil.generateToken(userDetails);
             
-            // Busca o usuário no banco para obter o CPF
             AppUser user = userService.findByUsername(request.getUsername())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado após autenticação"));
             
-            // Prepara a resposta com os dados do login e o token JWT
             AppUserResponse response = new AppUserResponse();
             response.setMessage("Login realizado com sucesso!");
             response.setUsername(user.getUsername());

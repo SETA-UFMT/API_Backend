@@ -1,5 +1,6 @@
 package br.com.projetoApi.Entity.User.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.com.projetoApi.Entity.User.Dto.AppUserRegistrationRequest;
 import br.com.projetoApi.Entity.User.Model.AppUser;
 import br.com.projetoApi.Entity.User.Repository.AppUserRepository;
 
@@ -30,31 +32,32 @@ public class AppUserService implements UserDetailsService {
         }
 
         AppUser userEntity = user.get();
-        // Usa os papéis (roles) da entidade, se disponíveis, ou define um padrão
         String[] roles = userEntity.getRoles().orElse(List.of("USER")).toArray(new String[0]);
 
         return org.springframework.security.core.userdetails.User.builder()
                 .username(userEntity.getUsername())
                 .password(userEntity.getPassword())
-                .roles(roles) // Usa os papéis da entidade
+                .roles(roles)
                 .build();
     }
 
-    public AppUser createUser(String username, String password, String cpf) {
-        // Verifica se o nome de usuário já existe
-        if (userRepository.existsByUsername(username)) {
-            throw new RuntimeException("Usuário já existe: " + username);
+    public AppUser createUser(AppUserRegistrationRequest request) {
+        if (userRepository.existsByUsername(request.getUsername())) {
+            throw new RuntimeException("Usuário já existe: " + request.getUsername());
         }
-        // Verifica se o CPF já existe
-        if (userRepository.existsByCpf(cpf)) {
-            throw new RuntimeException("CPF já cadastrado: " + cpf);
+        if (userRepository.existsByCpf(request.getCpf())) {
+            throw new RuntimeException("CPF já cadastrado: " + request.getCpf());
         }
 
         AppUser user = new AppUser();
-        user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(password));
-        user.setCpf(cpf);
-        user.setRoles(List.of("USER")); // Define um papel padrão
+        user.setUsername(request.getUsername());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setCpf(request.getCpf());
+
+        List<String> roles = request.getRoles() != null && !request.getRoles().isEmpty()
+                                ? request.getRoles()
+                                : Arrays.asList("USER");
+        user.setRoles(roles);
 
         return userRepository.save(user);
     }
