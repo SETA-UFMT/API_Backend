@@ -23,7 +23,7 @@ services:
         condition: service_healthy  # A aplicação só inicia após o banco estar saudável
     # Política de reinício para garantir que o contêiner reinicie automaticamente
     # em caso de falhas, exceto se parado manualmente
-    restart: "unless-stopped"
+    restart: "no"
 
   # Serviço do banco de dados PostgreSQL
   db:

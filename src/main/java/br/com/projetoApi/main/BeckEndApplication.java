@@ -8,8 +8,14 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "br.com.projetoApi")
-@EnableJpaRepositories(basePackages = "br.com.projetoApi.Entity.User.Repository")
-@EntityScan(basePackages = "br.com.projetoApi.Entity.User.Model")
+@EnableJpaRepositories(basePackages = {
+    "br.com.projetoApi.Entity.User.Repository",
+    "br.com.projetoApi.Entity.Bloco.Repository"
+})
+@EntityScan(basePackages = {
+    "br.com.projetoApi.Entity.User.Model",
+    "br.com.projetoApi.Entity.Bloco.Model"
+})
 public class BeckEndApplication {
 
     public static void main(String[] args) {
