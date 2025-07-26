@@ -148,15 +148,6 @@ public class BlocoController {
         return ResponseEntity.ok(blocos);
     }
 
-    @Operation(summary = "Buscar blocos por nome", description = "Retorna uma lista de blocos que contenham o nome especificado")
-    @GetMapping("/buscar")
-    public ResponseEntity<List<BlocoDTO>> buscarBlocosPorNome(
-            @Parameter(description = "Nome ou parte do nome do bloco", required = true)
-            @RequestParam String nome) {
-        List<BlocoDTO> blocos = blocoService.buscarBlocosPorNome(nome);
-        return ResponseEntity.ok(blocos);
-    }
-
     @Operation(summary = "Listar blocos ativos", description = "Retorna uma lista de blocos com status ATIVO")
     @GetMapping("/ativos")
     public ResponseEntity<List<BlocoDTO>> listarBlocosAtivos() {
