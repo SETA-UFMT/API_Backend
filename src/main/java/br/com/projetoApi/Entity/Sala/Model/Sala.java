@@ -8,7 +8,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
+
 import br.com.projetoApi.Entity.Bloco.Model.Bloco;
+import br.com.projetoApi.Entity.Luz.Model.Luz;
 
 @Entity
 @Table(name = "salas")
@@ -51,6 +55,10 @@ public class Sala {
 
     @Column(name = "updated_at")
     private java.time.LocalDateTime updatedAt;
+
+    // Relacionamento com Luzes - Uma sala pode ter várias luzes
+@OneToMany(mappedBy = "sala", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+private List<Luz> luzes;
 
     @PrePersist
     protected void onCreate() {
