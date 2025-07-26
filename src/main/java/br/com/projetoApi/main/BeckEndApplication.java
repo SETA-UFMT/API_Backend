@@ -10,11 +10,13 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 @ComponentScan(basePackages = "br.com.projetoApi")
 @EnableJpaRepositories(basePackages = {
     "br.com.projetoApi.Entity.User.Repository",
-    "br.com.projetoApi.Entity.Bloco.Repository"
+    "br.com.projetoApi.Entity.Bloco.Repository",
+    "br.com.projetoApi.Entity.Sala.Repository"
 })
 @EntityScan(basePackages = {
     "br.com.projetoApi.Entity.User.Model",
-    "br.com.projetoApi.Entity.Bloco.Model"
+    "br.com.projetoApi.Entity.Bloco.Model",
+    "br.com.projetoApi.Entity.Sala.Model"
 })
 public class BeckEndApplication {
 

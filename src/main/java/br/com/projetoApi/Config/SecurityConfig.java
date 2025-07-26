@@ -49,7 +49,7 @@ public class SecurityConfig {
                 // Exige autenticação para rotas de perfil, logout e protegidas
                 .requestMatchers("/api/auth/profile", "/api/auth/logout").authenticated()
                 .requestMatchers("/api/blocos", "/api/blocos/**").authenticated()
-                .requestMatchers("/protected").authenticated()
+                .requestMatchers("/api/salas", "/api/salas/**").authenticated()
                 
                 // Todas as demais requisições requerem autenticação
                 .anyRequest().authenticated()
