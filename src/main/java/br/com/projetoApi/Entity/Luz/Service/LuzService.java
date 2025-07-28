@@ -207,6 +207,36 @@ public class LuzService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public List<LuzDTO> ligarTodasLuzesDaSala(Long salaId) {
+        // Verifica se a sala existe
+        salaRepository.findById(salaId)
+                .orElseThrow(() -> new EntityNotFoundException("Sala não encontrada com ID: " + salaId));
+        
+        List<Luz> luzes = luzRepository.findBySalaId(salaId);
+        luzes.forEach(luz -> luz.setStatus(StatusLuz.LIGADO));
+        luzRepository.saveAll(luzes);
+        
+        return luzes.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<LuzDTO> desligarTodasLuzesDaSala(Long salaId) {
+        // Verifica se a sala existe
+        salaRepository.findById(salaId)
+                .orElseThrow(() -> new EntityNotFoundException("Sala não encontrada com ID: " + salaId));
+        
+        List<Luz> luzes = luzRepository.findBySalaId(salaId);
+        luzes.forEach(luz -> luz.setStatus(StatusLuz.DESLIGADO));
+        luzRepository.saveAll(luzes);
+        
+        return luzes.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
     private LuzDTO convertToDTO(Luz luz) {
         LuzDTO dto = new LuzDTO();
         dto.setId(luz.getId());

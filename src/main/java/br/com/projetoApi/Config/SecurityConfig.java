@@ -50,7 +50,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/auth/profile", "/api/auth/logout").authenticated()
                 .requestMatchers("/api/blocos", "/api/blocos/**").authenticated()
                 .requestMatchers("/api/salas", "/api/salas/**").authenticated()
-                .requestMatchers("/api/luzes", "/api/luzes/**").authenticated()
+                .requestMatchers("/api/luzes", "/api/luzes/**").permitAll()
                 
                 // Todas as demais requisições requerem autenticação
                 .anyRequest().authenticated()
