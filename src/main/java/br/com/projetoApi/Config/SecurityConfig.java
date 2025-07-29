@@ -62,11 +62,11 @@ public class SecurityConfig {
 
                 // Rotas de luzes (acesso livre)
                 .requestMatchers(HttpMethod.GET, "/api/luzes/**").permitAll()
-                 // Rotas de luzes (acesso livre)
+                 // Rotas de luzes (acesso restrito)
                 .requestMatchers(HttpMethod.POST, "/api/luzes/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT, "/api/luzes/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/api/luzes/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PATCH, "/api/luzes/**").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/luzes/**").hasAnyRole("ADMIN", "PROFESSOR")
+                .requestMatchers(HttpMethod.PATCH, "/api/luzes/**").hasAnyRole("ADMIN", "PROFESSOR")
                 
 
                 
