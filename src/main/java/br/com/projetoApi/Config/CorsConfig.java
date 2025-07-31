@@ -16,7 +16,7 @@ public class CorsConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // Lógica: Define quais domínios podem acessar sua API.
-        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000", "https://meudominio.com"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000", "http://localhost:5000"));
 
         // Lógica: Permite os métodos HTTP (GET, POST, PUT, DELETE, OPTIONS).
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
