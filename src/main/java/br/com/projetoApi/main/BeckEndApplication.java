@@ -6,19 +6,24 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+/**
+ * Classe principal da aplicação Spring Boot.
+ */
 @SpringBootApplication
 @ComponentScan(basePackages = "br.com.projetoApi")
 @EnableJpaRepositories(basePackages = {
     "br.com.projetoApi.Entity.User.Repository",
     "br.com.projetoApi.Entity.Bloco.Repository",
     "br.com.projetoApi.Entity.Sala.Repository",
-    "br.com.projetoApi.Entity.Luz.Repository"  
+    "br.com.projetoApi.Entity.Luz.Repository",
+    "br.com.projetoApi.Entity.ArCondicionado.Repository"
 })
 @EntityScan(basePackages = {
     "br.com.projetoApi.Entity.User.Model",
     "br.com.projetoApi.Entity.Bloco.Model",
     "br.com.projetoApi.Entity.Sala.Model",
-    "br.com.projetoApi.Entity.Luz.Model"  
+    "br.com.projetoApi.Entity.Luz.Model",
+    "br.com.projetoApi.Entity.ArCondicionado.Model"
 })
 public class BeckEndApplication {
 
